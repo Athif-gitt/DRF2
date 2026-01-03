@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from .serializers import RegisterSerializer, BookSerializer
+from .serializers import RegisterSerializer
 from django.contrib.auth import authenticate
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly, BasePermission
 from .models import Book
@@ -41,10 +41,10 @@ class LoginApi(APIView):
             status=status.HTTP_401_UNAUTHORIZED
         )
 
-class BookViewSet(ModelViewSet):
-    queryset = Book.objects.all()
-    serializer = BookSerializer
-    permission_classes = [IsAuthenticated]
+# class BookViewSet(ModelViewSet):
+#     queryset = Book.objects.all()
+#     serializer = BookSerializer
+#     permission_classes = [IsAuthenticated]
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+#     def perform_create(self, serializer):
+#         serializer.save(owner=self.request.user)
